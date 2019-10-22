@@ -1,0 +1,66 @@
+<% include partials/header %>
+
+
+                    <div class="span9">
+                        <div class="content">
+                        <div>
+                        <h4> Welcome <%= currentUser.firstname %>, </h4>
+                        </div>
+                        <% if(message != "") {%>
+                            <div class="alert alert-light alert-dismissible  show" role="alert">
+                                <strong>Note: </strong> <%=message%>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        <%}%>
+                            <div class="btn-controls">
+                                <div class="btn-box-row row-fluid">
+                                    <a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦ <%= currentUser.dailydeposit %>
+                                    </b>
+                                        <p class="text-muted">
+                                            Today's Savings
+                                        </p>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦ <%= currentUser.totaldeposit %>
+                                    </b>
+                                        <p class="text-muted">
+                                            This Month's Savings</p>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦ <%= Math.floor(currentUser.availableforwithdrawal) %>
+                                    </b>
+                                        <p class="text-muted">
+                                            Withdrawable Balance</p>
+                                    </a>
+                                </div>
+                                <div class="btn-box-row row-fluid">
+                                    <div class="class="btn-box-row row-fluid"">
+                                        <div class="row-fluid">
+                                            <div class="span12">
+                                                <a href="/users/deposit" class="btn-box small span4"><i class="icon-envelope"></i><b>Make Deposit</b>
+                                                </a><a href="/users/withdrawal" class="btn-box small span4"><i class="icon-group"></i><b>Make Withdrawal</b>
+                                                </a><a href="/history" class="btn-box small span4"><i class="icon-exchange"></i><b>View History</b>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                      
+                    <!--/.span9-->
+                </div>
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

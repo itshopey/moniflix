@@ -1,0 +1,40 @@
+<% include partials/header %>
+
+        <div class="container">
+            <div class="row">
+                <div class="module span4">
+                    <form class="form-vertical" action="/users/transfertouser" method="POST">
+                        <div class="module-head">
+                            <h3>Transfer To Moniflix User</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="transferAmount" type="text" id="transferAmount" placeholder="Enter The Amount To Transfer">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="receiver" type="text" id="receiver" placeholder="Enter Receiver's Phone Number">
+                                </div>
+                            </div>
+                             <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right">Validate</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+                               
+
+
+
+
+
+    <% include partials/footer %>

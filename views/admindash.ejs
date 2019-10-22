@@ -1,0 +1,73 @@
+<% include partials/header %>
+
+
+                    <div class="span9">
+                        <div class="content">
+                        <div>
+                        <h4> Welcome <%= currentUser.firstname %>, </h4>
+                        </div>
+                            <div class="btn-controls">
+                                <div class="btn-box-row row-fluid">
+                                    <a href="/admin/balance" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦ <%= currentUser.dailydeposit %>
+                                    </b>
+                                        <p class="text-muted">
+                                            Current Balance
+                                        </p>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦ <%= currentUser.totaldeposit %>
+                                    </b>
+                                        <p class="text-muted">
+                                            Today's Deposits
+                                        </p>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <b>
+                                    ₦
+                                    </b>
+                                        <p class="text-muted">
+                                        	Today's Withdrawals
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="btn-box-row row-fluid">
+                                    <a href="/admin/withdrawalreq" class="btn-box big span4"><i class="icon-file"></i>
+                                    <b>
+                                    
+                                    </b>
+                                        <p class="text-muted">
+                                            Cash Withdrawal Requests
+                                        </p>
+                                    </a><a href="/adminhistory" class="btn-box big span4"><i class="icon-search"></i>
+                                    <b>
+                                    
+                                    </b>
+                                        <p class="text-muted">
+                                            History
+                                        </p>
+                                    </a><a href="/staffandagents" class="btn-box big span4"><i class="icon-user"></i>
+                                    <b>
+                                    
+                                    </b>
+                                        <p class="text-muted">
+                                        	Manage Staff And Agents
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                            </div>
+                        </div>
+                      
+                    <!--/.span9-->
+                </div>
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

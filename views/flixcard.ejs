@@ -1,0 +1,40 @@
+<% include partials/header %>
+
+        <div class="container">
+            <div class="row">
+                <div class="module span4">
+                    <form class="form-vertical" action="/users/deposit" method="POST">
+                        <div class="module-head">
+                            <h3>Make Cash Deposit</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="depositAmount" type="text" id="depositAmount" placeholder="Enter The Amount To Deposit">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="agentId" type="text" id="agentId" placeholder="Enter Receiving Agent ID">
+                                </div>
+                            </div>
+                             <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right">Make Cash Deposit</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+                               
+
+
+
+
+
+    <% include partials/footer %>

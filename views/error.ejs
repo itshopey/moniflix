@@ -1,0 +1,22 @@
+<% include partials/loginheader %>
+
+
+<div class="wrapper">
+    <div class="container">
+		<div class="span9">
+	    	<div class="content">
+	            <h3> Sorry, There Was An Error While Sending Your Email. See Errors Below. Click The Back Button To Go Back And Retry.</h3> 
+	            <hr>
+	            	<div class="container">
+	            		<%= error%>;
+	            	</div>
+	            <br>
+	            <hr>
+	            <p class="btn btn-secondary btn-lg"><a href="/contact">Go Back</a></p></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<% include partials/loginfooter %>

@@ -1,0 +1,65 @@
+<% include partials/loginheader %>
+
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="module module-login span4 offset4">
+                    <form class="form-vertical" action="/users/signup" method="POST">
+                        <div class="module-head">
+                            <h3>Sign Up</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="username" type="text" id="username" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="firstname" type="text" id="firstname" placeholder="First Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="lastname" type="text" id="lastname" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="email" type="text" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="phone" type="text" id="phone" placeholder="08*********">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="password" type="password" id="inputPassword" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right">Sign Up</button>
+                                    <label class="checkbox">
+                                        <input type="checkbox"> I agree to the <a href="/terms"> Terms & Conditions </a> of usage for this site.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+
+
+
+<% include partials/loginfooter %>
