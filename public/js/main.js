@@ -270,15 +270,15 @@ jQuery(document).ready(function($) {
 	// navigation
   var OnePageNavigation = function() {
     var navToggler = $('.site-menu-toggle');
-   	$("body").on("click", ".main-menu li a[href^='#'], .smoothscroll[href^='#'], .site-mobile-menu .site-nav-wrap li a", function(e) {
-      e.preventDefault();
+   	$("body").on("click", ".main-menu li a[href^='/'], .smoothscroll[href^='/'], .site-mobile-menu .site-nav-wrap li a", function(e) {
+      ;
 
-      var hash = this.hash;
+      var href = this.href;
 
       $('html, body').animate({
-        'scrollTop': $(hash).offset().top
+        'scrollTop': $(href).offset().href
       }, 600, 'easeInOutExpo', function(){
-        window.location.hash = hash;
+        window.location.href = href;
       });
 
     });

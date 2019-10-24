@@ -9,17 +9,18 @@ router.get("/users/deposit", isLoggedIn, function(req, res){
 
 //Show cash deposit form
 router.get("/users/deposit/cashdeposit", isLoggedIn, function(req, res){
-	res.render("cashdeposit", { currentUser: req.user})
+	res.render("cashdeposit", { currentUser: req.user, message:""})
 });
 
 //Make cash deposit
 router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
-	if(!req.body.depositAmount || !req.body.accountNumber){
-		res.send("Please Fill All Fields");
-	} else if(req.body.depositAmount < 100){
+	if(req.body.depositAmount < 100){
 		res.send("You Cannot Deposit Below ₦ 100")
 	} else {
 	User.findOne({phone: 0 + req.body.accountNumber}, function(err, user){
+		if(!user){
+			res.render("cashdeposit", {currentUser:req.user, message:"The Account Number Does Not Exist, Please Register The User"})
+		} else {
 			var newBalance = user.totaldeposit + Number(req.body.depositAmount);
 			var availableForWithdrawal = newBalance * 0.97
 			User.findOneAndUpdate({phone: 0 + req.body.accountNumber}, {totaldeposit:newBalance, availableforwithdrawal:availableForWithdrawal}, function(err, user){
@@ -35,11 +36,12 @@ router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
 					status: "Success"
 								})
 					user.save();
+					res.render("cashdeposit", {message:"Deposit Successful", currentUser:req.user});
 								}
 							})
-						})
-			}
-	res.redirect("/dashboard")
+					}
+				})
+		}
 });
 
 //Deposit with Flix card

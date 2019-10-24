@@ -6,7 +6,7 @@ body {
   line-height: 1.7;
   color: gray;
   font-weight: 400;
-  font-size: 1rem; }
+  font-size: 0.8rem; }
 
 ::-moz-selection {
   background: #000;
@@ -60,7 +60,7 @@ body:after {
     background: rgba(0, 0, 0, 0.2); }
 
 .btn {
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 30px;
   padding: 10px 30px; }
   .btn:hover, .btn:active, .btn:focus {
@@ -275,7 +275,7 @@ body:after {
   border-bottom: rgba(255, 255, 255, 0.7); }
   .site-navbar .site-logo {
     position: relative;
-    left: 0;
+    left: 10px;
     top: -5px; }
   .site-navbar .site-navigation .site-menu {
     margin-bottom: 0; }
@@ -297,7 +297,7 @@ body:after {
           color: #fd7e14; }
       .site-navbar .site-navigation .site-menu > li.social > a {
         padding-left: 5px;
-        padding-right: 5px; }
+        padding-right: 20px; }
     .site-navbar .site-navigation .site-menu .has-children {
       position: relative; }
       .site-navbar .site-navigation .site-menu .has-children > a {

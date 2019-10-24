@@ -14,10 +14,9 @@ router.get("/dashboard", isLoggedIn, function(req, res){
 		var userTransactions = user.transactions
 	//find transactions that are deposits and store them in an array
 	for(var i = userTransactions.length - 1; i >= 0; i--) {
-		if(userTransactions[i].type === "Credit - Cash Deposit" || "Credit - Flix Card" || "Credit - Debit Card"){
-				var deposit = [userTransactions[i].amount]
-				var amount = deposit.toString()
-				console.log(Number(amount))
+		if(userTransactions[i].type === "Credit - Cash Deposit" || "Credit - Flix Card" || "Credit - Debit Card" ){
+				var deposit =[];
+				deposit.push(userTransactions[i]);
 			}
 	}
 		userTransactions.forEach(function(transaction){

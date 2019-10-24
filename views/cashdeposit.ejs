@@ -6,17 +6,25 @@
                     <form class="form-vertical" action="/users/deposit" method="POST">
                         <div class="module-head">
                             <h3>Make Cash Deposit</h3>
+                            <% if(message != "") {%>
+                        <div class="alert alert-dismissible" role="alert">
+                        <%= message %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <% } %>
                         </div>
                         <div class="module-body">
                             <div class="control-group">
                                 <div class="controls row-fluid">
-                                    <input class="span12" name="depositAmount" type="text" id="depositAmount" placeholder="Enter The Amount To Deposit">
+                                    <input class="span12" name="depositAmount" type="text" id="depositAmount" placeholder="Enter The Amount To Deposit" required autofocus>
                                     <span></span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls row-fluid">
-                                    <input class="span12" name="accountNumber" type="text" id="accountNumber" placeholder="Enter Depositor's Account Number">
+                                    <input class="span12" name="accountNumber" type="text" id="accountNumber" placeholder="Enter Depositor's Account Number" required autofocus>
                                 </div>
                             </div>
                              <div class="module-foot">
