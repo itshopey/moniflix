@@ -54,10 +54,10 @@ mongoose.connect('mongodb://localhost/moniflix-app', {useNewUrlParser: true});
 
 
 
-
-app.listen(3000, function(){
-	console.log("Server started on port 3000!")
+app.listen(process.env.PORT || 3000, function(){
+    console.log("server Started")
 })
+
 
 module.exports = app;
 
