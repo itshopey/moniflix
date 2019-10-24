@@ -50,7 +50,7 @@ app.use(withdrawalRouter);
 app.use(transfersRouter);
 
 //Setting Up Database
-mongoose.connect('mongodb://localhost/moniflix-app', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI);
 
 
 
