@@ -10,14 +10,13 @@ router.get("/users/transfertouser", isLoggedIn, function(req, res){
 //Post Route
 router.post("/users/transfertouser", isLoggedIn, debitSender,  function(req, res){
 	User.findOne({phone: 0 + req.body.accountNumber}, function(err, user){
-		if(err){
-			console.log(err)
+		if(!user){
+			res.render("transfertouser", {currentUser:req.user, message:"Invalid Account Number"})
 		}else {
 	var receiverTotalDeposit = Number(user.totaldeposit) + Number(req.body.transferAmount);
-	console.log(receiverTotalDeposit)
-	var receiverBalance = Number(user.availableforwithdrawal) + Number(req.body.transferAmount);
+	var receiverBalance = receiverTotalDeposit * 0.97
 	User.findOneAndUpdate({phone: 0 + req.body.accountNumber}, {availableforwithdrawal:receiverBalance, totaldeposit:receiverTotalDeposit}, function(err, user){
-		if(err){
+		if(!user){
 			res.render("transfertouser", {currentUser:req.user, message:"Invalid Account Number"})
 		} else {
 			user.transactions.push({
