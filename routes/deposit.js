@@ -14,7 +14,9 @@ router.get("/users/deposit/cashdeposit", isLoggedIn, function(req, res){
 
 //Make cash deposit
 router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
-	if(req.body.depositAmount < 100){
+	if(req.user.phone === 0+req.body.accountNumber){
+		res.render("transfertouser", {currentUser:req.user, message: "You cannot make cash deposits to your own account"})
+	} else if(req.body.depositAmount < 100){
 		res.send("You Cannot Deposit Below ₦ 100")
 	} else {
 	User.findOne({phone: 0 + req.body.accountNumber}, function(err, user){

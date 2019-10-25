@@ -39,7 +39,7 @@ router.get("/users/profile/settings", isLoggedIn, function(req, res){
 });
 
 //Account Settings Update Route
-router.post("/users/profile/settings", function(req, res){
+router.post("/users/profile/settings", isLoggedIn, function(req, res){
 User.findOneAndUpdate({username:req.user.username}, {bankName:req.body.bankName, accountNumber:req.body.accountNumber, accountName:req.body.accountName}, function(){
 	if(!req.body.bankName || !req.body.accountNumber || !req.body.accountName){
 		res.render("accountsettings", {currentUser:req.user, message:"Please Fill All Fields"})
