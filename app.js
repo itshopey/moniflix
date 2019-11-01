@@ -49,8 +49,8 @@ app.use(withdrawalRouter);
 app.use(transfersRouter);
 
 //Setting Up Database
-mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});
-// mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI);
 
 
 
