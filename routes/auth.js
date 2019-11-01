@@ -24,7 +24,7 @@ router.get("/users/signup", function(req, res){
 
 //User sign up logic
 router.post("/users/signup", function(req, res){
-	var newUser = new User({username: req.body.username, firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, phone: req.body.phone, type: "User", dailydeposit: 0, totaldeposit: 0, availableforwithdrawal: 0});
+	var newUser = new User({username: req.body.username, firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, phone: req.body.phone, type: "User", referrer:req.body.referral, dailydeposit: 0, totaldeposit: 0, availableforwithdrawal: 0});
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err)

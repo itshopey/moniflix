@@ -14,7 +14,7 @@
            <th>Last Name</th>
            <th>Address</th>
            <th>Email</th>
-           <th>Contact</th>
+           <th>Account No</th>
            <th>Edit</th>
            <th>Delete</th>
           </thead>
@@ -26,7 +26,7 @@
                <td><%= users[i].lastname %></td>
                <td><%= users[i].address %></td>
                <td><%= users[i].email %></td>
-               <td><%= users[i].phone %></td>
+               <td><%= Number(users[i].phone) %></td>
                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn tablebtnedit" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="icon-edit"></span></button></p></td>
                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn tablebtndelete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="icon-trash"></span></button></p></td>
             </tr>

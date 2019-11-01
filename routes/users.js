@@ -7,24 +7,7 @@ router.get("/welcome", isLoggedIn, function(req, res){
 	});	
 
 //Show user Dashboard page
-router.get("/dashboard", isLoggedIn, function(req, res){
-	//find current user
-	User.findOne({_id:req.user._id}, function(err, user){
-	//find his transactions
-		var userTransactions = user.transactions
-	//find transactions that are deposits and store them in an array
-	for(var i = userTransactions.length - 1; i >= 0; i--) {
-		if(userTransactions[i].type === "Credit - Cash Deposit" || "Credit - Flix Card" || "Credit - Debit Card" ){
-				var deposit =[];
-				deposit.push(userTransactions[i]);
-			}
-	}
-		userTransactions.forEach(function(transaction){
-			
-		});		
-	});
-	//sum the array and send the value to the dashboard
-
+router.get("/dashboard", isLoggedIn, calculateDailyDeposit, function(req, res){
     res.render("dashboard", { currentUser: req.user, message: "" })
 });
 
@@ -72,12 +55,31 @@ router.get("/users/notifications", isLoggedIn, function(req, res){
 })
 
 //AGENT APPLICATION
-router.get("/agents/apply", isLoggedIn, function(req, res){
-	res.render("applyasagent", {currentUser:req.user})
+router.get("/apply", isLoggedIn, function(req, res){
+	res.render("becomeastaff", {currentUser:req.user})
 });
 
 
 //MIDDLEWARES
+//Calculate User Daily Deposit
+function calculateDailyDeposit(req, res, next){
+	User.findOne({_id:req.user._id}, function(err, user){
+if(err){
+	console.log(err);
+} else{
+	var transactions = user.transactions
+	for (var i = transactions.length - 1; i >= 0; i--) {
+            if(transactions[i].date === req._startTime && transactions[i].type === "Credit - Cash Deposit" || transactions[i].type === "Credit - Debit Card Deposit" || transactions[i].type === "Credit - Flix Card Deposit" || transactions[i].type === "Credit - Transfer From "){
+            	var dailyDeposit = transactions[i]
+            	console.log(dailyDeposit)
+            }
+			
+	}
+	return next()
+}
+});
+};
+
 //Sign in middleware
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){

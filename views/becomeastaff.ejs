@@ -1,0 +1,49 @@
+<% include partials/loginheader %>
+
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="module module-login span4 offset4">
+                    <form class="form-vertical" action="/users/signup" method="POST">
+                        <div class="module-head">
+                            <h3>Apply To Become Our Staff </h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="city" type="text"  placeholder="Where Do You Stay" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="address" type="text" placeholder="Your Full Address" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="bvn" type="text" placeholder="Submit Your BVN" required autofocus>
+                                </div>
+                            </div>
+                        <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right">Apply</button>
+                                    <label class="checkbox">
+                                        <input type="checkbox"> I agree that all the details i submit here are correct to the best of my knowledge.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+
+
+
+<% include partials/loginfooter %>

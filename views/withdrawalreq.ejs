@@ -10,6 +10,7 @@
          <table id="mytable" class="table table-bordred table-striped">
           <thead>
            <th>Account</th>
+           <th>User</th>
            <th>Date</th>
            <th>Amount</th>
            <th>Status</th>
@@ -23,7 +24,8 @@
               <tr>
             <%if(transaction.type === "Cash Withdrawal Request"){%>
         <td><%=transaction.account%></td>
-        <td><%= moment(transaction.date).format("dddd, MMMM Do YYYY, h:mm:ss a") %></td>
+        <td><%=transaction.owner%></td>
+        <td><%= transaction.date %></td>
         <td><%=transaction.amount%></td>
         <td><%=transaction.status%></td>
         <td>

@@ -4,7 +4,13 @@ var express		= require("express");
 //ADMIN STUFFS STARTS HERE
 //show admin dashboard
 router.get("/admin", isAdmin, isLoggedIn, function(req, res){
-	res.render("admindash", {currentUser:req.user});
+	User.find({},function(err, users){
+		if(err){
+			console.log(user);
+		} else{
+	res.render("admindash", {currentUser:req.user, users:users});
+		}
+	})
 	});
 
 //Show withdrawal requests
@@ -40,76 +46,118 @@ router.get("/admin/withdrawalreq/process/:id", isAdmin, isLoggedIn, function(req
 
 //Process withdrawal requests
 router.post("/admin/withdrawalreq/process", isAdmin, isLoggedIn, function(req, res){
-	User.findOne({_id:req.body.owner}, function(err, user){
+	User.findOne({phone:0 + req.body.owner}, function(err, user){
 			var balance = user.availableforwithdrawal;
-			var transaction = req.body.transactionId
-	if(balance < req.body.amount){
-		User.findOneAndUpdate({_id:req.body.owner, "withdrawalRequests._id": req.body.transactionId}, {"withdrawalRequests.$.status": "Declined - Insufficient Balance", "withdrawalRequests.$.processedBy": req.user._id}, function(err, user){
-			if(err){
-				console.log(err);
-			} else {
-				user.save();
-				var userRequests = user.withdrawalRequests;
-			userRequests.forEach(function(request){
-				if(request.id === req.body.transactionId){
-					var currentTransaction = request;
-				res.render("processwithdrawalreq", {message: "The User Does Not Have Sufficient Balance To Perform This Withdrawal, Transaction Has been Declined!", currentUser:req.user, transaction:currentTransaction });
-		
+			var transaction = req.body.transactionId;
+		if(balance < req.body.amount){
+			var requests = user.withdrawalRequests;
+		for (var i = requests.length - 1; i >= 0; i--) {
+				if(requests[i]._id === req.body.transactionId){
+					console.log(requests[i])
+					User.updateOne({_id: reqId}, {status: "declined", processedBy: req.user.firstname})
+					res.render("processwithdrawalreq")
+				}
 			}
-
-			})
-	}
-	
+		}
 	})
-} else if(req.body.transactionStatus === "Pending") {
-	User.findOneAndUpdate({_id:req.body.owner, "withdrawalRequests._id": req.body.transactionId}, {availableforwithdrawal: balance - req.body.amount, "withdrawalRequests.$.status": "Success - Debited", "withdrawalRequests.$.processedBy": req.user._id}, function(err, user){
-				if(err){
-					console.log(err);
-				} else {
-					user.save();
-					var userRequests = user.withdrawalRequests;
-				userRequests.forEach(function(request){
-					if(request.id === req.body.transactionId){
-						var currentTransaction = request;
-					res.render("processwithdrawalreq", {message: "Transaction Approved & User Has Been Debited! ", currentUser:req.user, transaction:currentTransaction });
-			
-				}
-
-				})
-		}
-		
-		})
-} else if(req.body.transactionStatus === "Success - Debited"){
-	User.findOneAndUpdate({_id:req.body.owner, "withdrawalRequests._id": req.body.transactionId}, {"withdrawalRequests.$.status": "Success - Disbursed", "withdrawalRequests.$.processedBy": req.user._id}, function(err, user){
-				if(err){
-					console.log(err);
-				} else {
-					user.save();
-					var userRequests = user.withdrawalRequests;
-				userRequests.forEach(function(request){
-					if(request.id === req.body.transactionId){
-						var currentTransaction = request;
-					res.render("processwithdrawalreq", {message: "Cash Disbursed! ", currentUser:req.user, transaction:currentTransaction });
-			
-				}
-
-				})
-		}
-		
-		})
-} else if(req.body.transactionStatus === "Success - Disbursed"){
-		var userRequests = user.withdrawalRequests;
-			userRequests.forEach(function(request){
-				if(request.id === req.body.transactionId){
-					var currentTransaction = request;
-				res.render("processwithdrawalreq", {message: "This Transaction Has Been Processed And Closed! ", currentUser:req.user, transaction:currentTransaction });
-			
-				}
-
-				})
-		}
-})
 });
+				
+// 		User.findOneAndUpdate({id: req.body.transactionId}, {status: "Declined - Insufficient Balance", processedBy: req.user._id}, function(err, user){
+// 			if(err){
+// 				console.log(err);
+// 			} else {
+// 				console.log(user)
+// 				// user.save();
+// 				var userRequests = user.withdrawalRequests;
+// 			userRequests.forEach(function(request){
+// 				if(request.id === req.body.transactionId){
+// 					var currentTransaction = request;
+// 				res.render("processwithdrawalreq", {message: "The User Does Not Have Sufficient Balance To Perform This Withdrawal, Transaction Has been Declined!", currentUser:req.user, transaction:currentTransaction });
+		
+// 			}
+
+// 			})
+// 	}
+	
+// 	})
+// } else if(req.body.transactionStatus === "Pending") {
+// 	User.findOneAndUpdate({phone:0 + req.body.owner}, {}, function(err, user){
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			for (var i = user.withdrawalRequests.length - 1; i >= 0; i--) {
+// 				if(req.body.transactionId === user.withdrawalRequests[i]._id){
+// 					console.log(user.withdrawalRequests[i])
+// 					// user.withdrawalRequests.splice(user.withdrawalRequests[i], 1);
+
+// 					user.save();
+// 				}
+// 			}
+// 		}
+// 	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// User.findOneAndUpdate({phone:0 + req.body.owner, "withdrawalRequests._id": req.body.transactionId}, {availableforwithdrawal: balance - req.body.amount, "withdrawalRequests.$.status": "Success - Debited", "withdrawalRequests.$.processedBy": req.user.username}, function(err, user){
+	// 			if(err){
+	// 				console.log(err);
+	// 			} else {
+	// 				var userRequests = user.withdrawalRequests;
+	// 			userRequests.forEach(function(request){
+	// 				if(request.id === req.body.transactionId){
+	// 					var currentTransaction = request;
+	// 				user.save();
+	// 				res.render("processwithdrawalreq", {message: "Transaction Approved & User Has Been Debited! ", currentUser:req.user, transaction:currentTransaction });
+			
+	// 			}
+
+	// 			})
+	// 	}
+		
+	// 	})
+// } else if(req.body.transactionStatus === "Success - Debited"){
+// 	User.findOneAndUpdate({phone:0 + req.body.owner, "withdrawalRequests._id": req.body.transactionId}, {"withdrawalRequests.$.status": "Success - Disbursed", "withdrawalRequests.$.processedBy": req.user._id}, function(err, user){
+// 				if(err){
+// 					console.log(err);
+// 				} else {
+// 					var userRequests = user.withdrawalRequests;
+// 				userRequests.forEach(function(request){
+// 					if(request.id === req.body.transactionId){
+// 						var currentTransaction = request;
+// 					user.save();
+// 					res.render("processwithdrawalreq", {message: "Cash Disbursed! ", currentUser:req.user, transaction:currentTransaction });
+			
+// 				}
+
+// 				})
+// 		}
+		
+// 		})
+// } else if(req.body.transactionStatus === "Success - Disbursed"){
+// 		var userRequests = user.withdrawalRequests;
+// 			userRequests.forEach(function(request){
+// 				if(request.id === req.body.transactionId){
+// 					var currentTransaction = request;
+// 				res.render("processwithdrawalreq", {message: "This Transaction Has Been Processed And Closed! ", currentUser:req.user, transaction:currentTransaction });
+			
+// 				}
+
+// 				})
+// 		}
+// })
+// });
 
 
 //Show staff and agents

@@ -15,9 +15,9 @@ router.get("/users/deposit/cashdeposit", isLoggedIn, function(req, res){
 //Make cash deposit
 router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
 	if(req.user.phone === 0+req.body.accountNumber){
-		res.render("transfertouser", {currentUser:req.user, message: "You cannot make cash deposits to your own account"})
+		res.render("cashdeposit", {currentUser:req.user, message: "You cannot make cash deposits to your own account"})
 	} else if(req.body.depositAmount < 100){
-		res.send("You Cannot Deposit Below ₦ 100")
+		res.render("cashdeposit", { currentUser: req.user,message:"You Cannot Deposit Below ₦ 100"})
 	} else {
 	User.findOne({phone: 0 + req.body.accountNumber}, function(err, user){
 		if(!user){
@@ -29,16 +29,18 @@ router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
 				if(err){
 					console.log(err);
 				} else {
-					user.transactions.push({
+					var deposit = {
 					amount: Number(req.body.depositAmount),
 					type: "Credit - Cash Deposit",
 					sender: req.user.username,
-					receiver: req.body.accountNumber, 
+					owner: req.body.accountNumber, 
 					date: req._startTime,
 					status: "Success"
-								})
+								};
+					user.transactions.push(deposit)
 					user.save();
 					res.render("cashdeposit", {message:"Deposit Successful", currentUser:req.user});
+					console.log(user.transactions)
 								}
 							})
 					}

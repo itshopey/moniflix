@@ -42,27 +42,28 @@
                         </div>
     <input name="transactionId" type="hidden" value="<%=transaction._id%>"> 
     <input name="amount" type="hidden" value="<%=transaction.amount%>"> 
-    <input name="owner" type="hidden" value="<%= transaction.owner %>"> 
+    <input name="owner" type="hidden" value="<%= transaction.account %>"> 
     <input name="transactionStatus" type="hidden" value="<%= transaction.status %>"> 
+    
                                 
                         <div class="module-foot setcenter">
                         
                         <% if(transaction.status === "Success - Debited") {%>
                             <div class="control-group">
                                 <div class="controls clearfix">
-                                        <b><button type="submit" class="btn adminButton">Disburse</button></b>
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Disburse</button></b>
                                 </div>
                             </div>
                         <% } else if(transaction.status === "Success - Disbursed"){ %>
                              <div class="control-group">
                                 <div class="controls clearfix">
-                                        <b><button type="submit" class="btn adminButton">Query</button></b>
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Query</button></b>
                                 </div>
                             </div>
                         <% } else { %>
                              <div class="control-group">
                                 <div class="controls clearfix">
-                                        <b><button type="submit" class="btn adminButton">Approve</button></b>
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Approve</button></b>
                                 </div>
                             </div>
                         <% } %>

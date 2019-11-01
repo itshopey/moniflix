@@ -31,13 +31,15 @@ router.post("/users/withdrawal", isLoggedIn, function(req, res){
 			} else{
 				var transaction = {
 					type: "Cash Withdrawal Request",
-					date: req._startTime,
+					date: new Date(req._startTime),
 					amount: req.body.withdrawalAmount,
 					status: "Pending",
-					owner: req.user._id,
+					owner: req.user.firstname,
 					account: req.user.phone
 				}
+				console.log(transaction)
 				user.withdrawalRequests.push(transaction);
+				user.transactions.push(transaction);
 				user.save();
 	res.render("cashwithdrawal", {currentUser: req.user, message: "Cash Withdrawal Request Submitted Sucessfully"});
 			}

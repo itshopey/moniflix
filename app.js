@@ -13,8 +13,6 @@ var createError 		= require('http-errors');
     Swal                = require('sweetalert2');
     User 				= require('./models/user');
     Transactions		= require('./models/transactions');
-	moment 				= require('moment');
-						  moment().format();
 
 
 mongoose.set('useFindAndModify', false);
@@ -26,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 //ROUTES
@@ -50,12 +49,14 @@ app.use(withdrawalRouter);
 app.use(transfersRouter);
 
 //Setting Up Database
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});
+// mongoose.connect(process.env.MONGODB_URI);
 
 
 
-app.listen(process.env.PORT || 3000, function(){
-    console.log("server Started")
+var port = 3000
+app.listen(process.env.PORT || port, function(){
+    console.log("server Started On Port " + port)
 })
 
 

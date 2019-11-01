@@ -20,8 +20,8 @@ router.post("/users/transfertouser", isLoggedIn, debitSender,  function(req, res
 			res.render("transfertouser", {currentUser:req.user, message:"Invalid Account Number"})
 		} else {
 			user.transactions.push({
-			type: "Credit - Transfer From " + Number(req.user.phone),
-			Sender: Number(req.user.phone),
+			type: "Credit - Transfer From ",
+			sender: Number(req.user.phone),
 			date: req._startTime,
 			amount: req.body.transferAmount
 				})
@@ -42,7 +42,7 @@ function debitSender(req, res, next){
 		var newSenderBalance = req.user.availableforwithdrawal - req.body.transferAmount;
 		var transferAmount = Number(req.body.transferAmount);
 		var transaction = {
-			type: "Debit - Transfer To " + receiver,
+			type: "Debit - Transfer To " + req.body.accountNumber,
 			receiver: receiver,
 			date: req._startTime,
 			amount: req.body.transferAmount

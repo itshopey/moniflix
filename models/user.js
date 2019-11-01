@@ -6,7 +6,7 @@ var mongoose 				= require('mongoose'),
 amount: Number,
 type: String,
 sender: String,
-receiver: String,
+owner: String,
 date: String,
 status: String,
 });
@@ -22,7 +22,7 @@ owner: String,
 date: String,
 status: String,
 processedBy: String,
-account: Number
+account: Number,
 });
 
 withdrawSchema.plugin(passportLocalMongoose);
@@ -35,6 +35,7 @@ var userSchema = new mongoose.Schema({
 	lastname: String,
 	email: String,
 	phone: String,
+	referrer: String,
 	dailydeposit: Number,
 	totaldeposit: Number,
 	availableforwithdrawal: Number,

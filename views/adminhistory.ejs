@@ -9,20 +9,22 @@
        </div>
          <table id="mytable" class="table table-bordred table-striped">
           <thead>
-           <th>Transaction Ref</th>
+           <th>User</th>
            <th>Transaction Date</th>
            <th>Transaction Amount</th>
            <th>Transaction Type</th>
+           <th>Approved By</th>
           </thead>
     <tbody>
       <%  for (var i = users.length -1; i >= 0; i--) { %>
       <tr>
         <%var trans = users[i].transactions%>
         <% trans.forEach(function(transaction){ %>
-        <td><%=transaction._id%></td>
+        <td><%=transaction.owner%></td>
         <td><%= moment(transaction.date).format("dddd, MMMM Do YYYY, h:mm:ss a") %></td>
         <td><%=transaction.amount%></td>
         <td><%=transaction.type%></td>
+        <td><%=transaction.sender%></td>
       </tr>
       <%}) %>
       <% } %>
