@@ -19,7 +19,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //User sign up page
 router.get("/users/signup", function(req, res){
-		res.render("signup")
+		res.render("signup", {currentUser:""})
 	});
 
 //User sign up logic
@@ -28,7 +28,7 @@ router.post("/users/signup", function(req, res){
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err)
-			return res.render('signup')
+			return res.render('signup', {currentUser:""})
 		}
 		passport.authenticate("local")(req, res, function(){
 		res.redirect("/welcome")
@@ -36,10 +36,24 @@ router.post("/users/signup", function(req, res){
 	});
 });
 
+//Staff sign up logic
+router.post("/staff/apply", function(req, res){
+	var newStaff = new Staff({username: req.body.username, name: req.body.name, dob: req.body.dob, email: req.body.email, phone: req.body.phone, type: "Pending Staff Approval", nationality:req.body.nationality, currentCity: req.body.city, fullAddress: req.body.address, bvn: req.body.bvn});
+	Staff.register(newStaff, req.body.password, function(err, staff){
+		if(err){
+			console.log(err)
+			return res.render('becomeastaff', {message:"Please Check For Errors & Fill Required Fields", currentUser: req.user})
+		}
+		passport.authenticate("local")(req, res, function(){
+		res.redirect("/staffDashboard")
+		});
+	});
+});
+
 
 //Show user signin form
 router.get("/users/signin", function(req, res){
-		res.render("signin", {error:'' })
+		res.render("signin", {error:'', currentUser:"" })
 	});
 
 //signin logic

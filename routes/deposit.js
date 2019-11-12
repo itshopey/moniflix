@@ -37,7 +37,8 @@ router.post("/users/deposit/", isAdmin, isLoggedIn, function(req, res){
 					date: req._startTime,
 					status: "Success"
 								};
-					user.transactions.push(deposit)
+					user.transactions.push(deposit);
+					user.dailydeposit.push(req.body.depositAmount);
 					user.save();
 					res.render("cashdeposit", {message:"Deposit Successful", currentUser:req.user});
 					console.log(user.transactions)

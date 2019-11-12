@@ -1,9 +1,8 @@
 var express		= require("express");
 	router		= express.Router()
 
-//ADMIN STUFFS STARTS HERE
 //show admin dashboard
-router.get("/admin", isAdmin, isLoggedIn, function(req, res){
+router.get("/admin", isLoggedIn, isAdmin, function(req, res){
 	User.find({},function(err, users){
 		if(err){
 			console.log(user);
@@ -14,7 +13,7 @@ router.get("/admin", isAdmin, isLoggedIn, function(req, res){
 	});
 
 //Show withdrawal requests
-router.get("/admin/withdrawalreq", isAdmin, isLoggedIn, function(req, res){
+router.get("/admin/withdrawalreq", isLoggedIn, isAdmin, function(req, res){
 	User.find({}, function(err, users){
 		if(err){
 			console.log(err)
@@ -23,7 +22,7 @@ router.get("/admin/withdrawalreq", isAdmin, isLoggedIn, function(req, res){
 		})
 	})
 //View withdrawal requests
-router.get("/admin/withdrawalreq/process/:id", isAdmin, isLoggedIn, function(req, res){
+router.get("/admin/withdrawalreq/process/:id", isLoggedIn, isAdmin, function(req, res){
 			var id = req.params.id
 	User.find({}, function(err, users){
 		if(err){
@@ -45,7 +44,7 @@ router.get("/admin/withdrawalreq/process/:id", isAdmin, isLoggedIn, function(req
 	})
 
 //Process withdrawal requests
-router.post("/admin/withdrawalreq/process", isAdmin, isLoggedIn, function(req, res){
+router.post("/admin/withdrawalreq/process", isLoggedIn, isAdmin, function(req, res){
 	User.findOne({phone:0 + req.body.owner}, function(err, user){
 			var balance = user.availableforwithdrawal;
 			var transaction = req.body.transactionId;
@@ -160,17 +159,50 @@ router.post("/admin/withdrawalreq/process", isAdmin, isLoggedIn, function(req, r
 // });
 
 
-//Show staff and agents
-router.get("/staffandagents", isAdmin, isLoggedIn, function(req, res){
-	User.find({}, function(err, users){
+//Select Staff Type
+router.get("/admin/staffmanagement", isLoggedIn, isAdmin, function(req, res){
+	res.render("staffmanagement", {currentUser: req.user});
+});
+
+//View Existing Staff
+router.get("/admin/staffmanagement/existingstaff", isLoggedIn, isAdmin, function(req, res){
+	User.find({type: "Staff"}, function(err, staff){
+		if(err){
+			console.log(err);
+		} res.render("staff", {currentUser: req.user, staff:staff})
+	})
+})
+
+//process selected Staff
+router.get("/admin/staffmanagement/existingstaff/:_id", isLoggedIn, isAdmin, function(req, res){
+	res.render("staffProfile", {currentUser: req.user})
+})
+
+//View All Agent Applications
+router.get("/agentapplications", isLoggedIn, isAdmin, function(req, res){
+	User.find({type:"Applied as Agent"}, function(err, agent){
 		if(err){
 			console.log(err);
 		} else {
-			res.render("staffandagents", {users:users,currentUser:req.user});
+			console.log(agent)
+			res.render("agentapplications", {agent:agent, currentUser:req.user});
 		}
 	})
 
 });
+
+//View Selected Agent Application
+router.get("/agentapplications/:id", isLoggedIn, isAdmin, function(req, res){
+	console.log(req.params.id);
+	res.render("agentapplications", {currentUser:req.user})
+});
+
+
+
+// 	console.log(req.params)
+// 	User.findOne({_id:req.params._id})
+// 	res.render("processagentapplication", {currentUser:req.user,})
+// });
 
 
 router.get("/adminhistory", isAdmin, isLoggedIn, function(req, res){
@@ -198,6 +230,10 @@ router.get('/staffandagents/:page', function(req, res, next) {
                 })
             })
         })
+})
+
+router.get("/manageagents", isLoggedIn, isAdmin, function(req, res) {
+   res.render("manageagents", {currentUser:req.user})
 })
 
 

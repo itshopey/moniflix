@@ -37,7 +37,6 @@ router.post("/users/withdrawal", isLoggedIn, function(req, res){
 					owner: req.user.firstname,
 					account: req.user.phone
 				}
-				console.log(transaction)
 				user.withdrawalRequests.push(transaction);
 				user.transactions.push(transaction);
 				user.save();

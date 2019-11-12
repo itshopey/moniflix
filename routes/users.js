@@ -7,8 +7,20 @@ router.get("/welcome", isLoggedIn, function(req, res){
 	});	
 
 //Show user Dashboard page
-router.get("/dashboard", isLoggedIn, calculateDailyDeposit, function(req, res){
-    res.render("dashboard", { currentUser: req.user, message: "" })
+router.get("/dashboard", isLoggedIn, function(req, res){
+	User.findOne({_id:req.user._id}, function(err, user){
+		var deposit = req.user.dailydeposit;
+		var dailydeposit = []
+		for (var i = deposit.length - 1; i >= 0; i--) {
+			if (moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL'))
+	dailydeposit.push(deposit[i])
+	var totaldailydeposit = dailydeposit.reduce(function(sum, deposit){
+          return sum + deposit;
+        }, 0); 
+	}
+		console.log(dailydeposit)
+    res.render("dashboard", { dailydeposit:totaldailydeposit, currentUser: req.user, message: "" })
+	})
 });
 
 
@@ -54,31 +66,62 @@ router.get("/users/notifications", isLoggedIn, function(req, res){
 	res.render("notifications")
 })
 
-//AGENT APPLICATION
+//Staff Application
 router.get("/apply", isLoggedIn, function(req, res){
-	res.render("becomeastaff", {currentUser:req.user})
+	res.render("becomeastaff", {message: "", currentUser:req.user})
 });
+
+//Process Staff Application
+router.post("/applyasstaff", isLoggedIn, function(req, res){
+	var application = {
+		currentCity:req.body.city,
+		fullAddress: req.body.address,
+		bvn: req.body.bvn,
+		applicationDate: req._startTime,
+		status: "Pending Approval"
+	}
+	User.findOne({_id:req.user._id}, function(err, user){
+		if(err){
+			console.log(err);
+		} else {
+			user.staff.push(application);
+			user.save();
+			console.log(user);
+		}
+	res.render("becomeastaff", {user:user, currentUser:req.user});
+	})
+	
+});
+
+//View Submitted Staff Application
+router.get("/staffapplications", isLoggedIn, function(req, res){
+	User.findOne({firstname:"Mariam"}).populate("staff").exec(function(err, users){
+		console.log(users.staff)
+	})
+	res.render("newstaffapplications")
+});
+
 
 
 //MIDDLEWARES
 //Calculate User Daily Deposit
-function calculateDailyDeposit(req, res, next){
-	User.findOne({_id:req.user._id}, function(err, user){
-if(err){
-	console.log(err);
-} else{
-	var transactions = user.transactions
-	for (var i = transactions.length - 1; i >= 0; i--) {
-            if(transactions[i].date === req._startTime && transactions[i].type === "Credit - Cash Deposit" || transactions[i].type === "Credit - Debit Card Deposit" || transactions[i].type === "Credit - Flix Card Deposit" || transactions[i].type === "Credit - Transfer From "){
-            	var dailyDeposit = transactions[i]
-            	console.log(dailyDeposit)
-            }
+// function calculateDailyDeposit(req, res, next){
+// 	User.findOne({_id:req.user._id}, function(err, user){
+// if(err){
+// 	console.log(err);
+// } else{
+// 	var deposit = user.dailydeposit
+// 	for (var i = deposit.length - 1; i >= 0; i--) {
+//             if(moment(deposit[i].date).format('LL') === moment(deposit[i].date).format('LL')){
+//             	var dailyDeposit = transactions[i]
+//             	console.log(dailyDeposit)
+//             }
 			
-	}
-	return next()
-}
-});
-};
+// 	}
+// 	return next()
+// }
+// });
+// };
 
 //Sign in middleware
 function isLoggedIn(req, res, next){

@@ -4,14 +4,64 @@
         <div class="container">
             <div class="row">
                 <div class="module module-login span4 offset4">
-                    <form class="form-vertical" action="/users/signup" method="POST">
+                    <form class="form-vertical" action="/staff/apply" method="POST">
                         <div class="module-head">
                             <h3>Apply To Become Our Staff </h3>
+                                <% if(message != "") {%>
+                        <div class="alert alert-dismissible" role="alert">
+                        <%= message %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <% } %>
                         </div>
                         <div class="module-body">
                             <div class="control-group">
                                 <div class="controls row-fluid">
-                                    <input class="span12" name="city" type="text"  placeholder="Where Do You Stay" required autofocus>
+                                    <input class="span12" name="username" type="text"  placeholder="Choose A Username" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="name" type="text"  value="<%=currentUser.firstname%> <%=currentUser.lastname%>" required readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="email" type="email"  placeholder="Submit a Valid Email Address" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="dob" type="date"  placeholder="Select Your Date Of Birth" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="nationality" type="text"  placeholder="Nationality" required autofocus>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="phone" type="text"  value="<%=currentUser.phone%>" required >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="city" type="text"  placeholder="Your Current City" required autofocus>
                                 </div>
                             </div>
                         </div>
@@ -25,7 +75,13 @@
                         <div class="module-body">
                             <div class="control-group">
                                 <div class="controls row-fluid">
-                                    <input class="span12" name="bvn" type="text" placeholder="Submit Your BVN" required autofocus>
+                                    <input class="span12" name="bvn" type="text" placeholder="Submit Your BVN" required autofocus minlength="10" maxlength="10">
+                                </div>
+                            </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="password" type="password" placeholder="Secure Your Account With A Password" required autofocus>
                                 </div>
                             </div>
                         <div class="module-foot">

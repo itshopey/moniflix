@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="nav-collapse collapse navbar-inverse-collapse">
-                
+                <%if(!currentUser){%>
                     <ul class="nav pull-right">
                         <li><a href="/users/signin">
                             Sign In
@@ -39,6 +39,7 @@
                             Sign Up
                         </a></li>
                     </ul>
+                    <%}%>
                 </div><!-- /.nav-collapse -->
             </div>
         </div><!-- /navbar-inner -->

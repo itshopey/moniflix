@@ -10,10 +10,10 @@ var createError 		= require('http-errors');
     mongoose 			= require('mongoose');
     passport			= require('passport');
     LocalStrategy		= require('passport-local');
-    Swal                = require('sweetalert2');
     User 				= require('./models/user');
-    Transactions		= require('./models/transactions');
-
+    Staff       		= require('./models/staff');
+    moment              = require('moment');
+                          moment().format();
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -49,8 +49,8 @@ app.use(withdrawalRouter);
 app.use(transfersRouter);
 
 //Setting Up Database
-// mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});
+// mongoose.connect(process.env.MONGODB_URI);
 
 
 

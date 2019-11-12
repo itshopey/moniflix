@@ -1,0 +1,63 @@
+<% include partials/header %>
+
+<div class="span9">
+    <div class="content">
+      <div class="table-responsive">
+        <h4>All Staff </h4>
+       <div>
+        <input class="span9 searchbox" id="search" type="textbox" placeholder="Type To Search">
+       </div>
+         <table id="mytable" class="table table-bordred table-striped">
+          <thead>
+           <th>Name</th>
+           <th>Designation</th>
+           <th>Account Number</th>
+           <th>Employment Date</th>
+           <th>Salary</th>
+           <th>Action</th>
+          </thead>
+    <tbody>
+         <%staff.forEach(function(staff){ %>
+              <tr>
+        <td><%=staff.firstname %> <%= staff.lastname%></td>
+        <td><%=staff.designation%></td>
+        <td><%= Number(staff.phone) %></td>
+        <td>22nd January, 2019</td>
+        <td><%=25,000%></td>
+        <td>
+          <a href="/admin/staffmanagement/existingstaff/<%=currentUser._id%>" class="btn btn-primary tablebtndelete"><span class="icon-chevron-right"></span></a>
+        </td>
+      </tr>
+      <%})%>
+    </tbody>
+    
+</table>
+    <div class="module-foot">
+     <div class="control-group controls clearfix">
+       <ul class="pagination pull-right pages">
+          <li class="disabled nav-li"><a href="#"><span class="icon-fast-backward"></span></a></li>
+          <li class="active nav-li"><a href="#">1</a></li>
+          <li class="nav-li"><a href="#">2</a></li>
+          <li class="nav-li"><a href="#">3</a></li>
+          <li class="nav-li"><a href="#">4</a></li>
+          <li class="nav-li"><a href="#">5</a></li>
+          <li class="nav-li"><a href="#"><span class="icon-fast-forward"></span></a></li>
+        </ul>
+     </div>
+    </div>
+  </div>
+ 
+         
+              </div>
+            </div>
+                      
+            <!--/.span9-->
+        </div>
+    </div>
+     <!--/.container-->
+</div>
+<!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

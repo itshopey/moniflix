@@ -14,7 +14,6 @@ status: String,
 transactionsSchema.plugin(passportLocalMongoose);
 
 
-
     var withdrawSchema = new mongoose.Schema({
 amount: Number,
 type: String,
@@ -25,9 +24,7 @@ processedBy: String,
 account: Number,
 });
 
-withdrawSchema.plugin(passportLocalMongoose);
-
-
+withdrawSchema.plugin(passportLocalMongoose); 
 
 var userSchema = new mongoose.Schema({
 	username: String,
@@ -36,7 +33,7 @@ var userSchema = new mongoose.Schema({
 	email: String,
 	phone: String,
 	referrer: String,
-	dailydeposit: Number,
+	dailydeposit: [Number],
 	totaldeposit: Number,
 	availableforwithdrawal: Number,
 	bankName: String,
