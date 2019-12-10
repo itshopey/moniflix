@@ -1,0 +1,65 @@
+<% include partials/header %>
+
+
+
+<div class="container">
+    <div class="row">
+       <div class="module span8">
+        <div class="module-head">
+            <h3>Welcome To MoniFlix</h3>
+        </div class="module-body">
+        <p class="module-body">Dear <%= currentUser.firstname %>, Welcome to MoniFlix Nigeria. </p>
+        <p class="module-body">
+        Moniflix is a platform designed to add values to you and your Money with us,we give you convenient and easy access to all your savings,investments and all other financial transactions/services.
+        With Moniflix,you can do so much more,you can save,invest,withdraw/transfer to all banks,pay bills and so much more designed to serve and suit your style.
+        </p>
+        <p class="module-body">
+            For convenience means of savings either with us or your designated banks,investments with us, payment of bills and other transactions, we have designed various means of your easy access to the above services
+Such as:
+Pay,save,transfer or invest with us using your savings with us or your effect your transactions with your bank card using our app as low as 5 naira to all banks.
+        </p>
+        <p class="module-body">
+            Flixcard
+This is our new designed card to help with all your daily transactions with lower charges 5 naira for transactions as follows:
+Transfers to your local or friend's accounts
+Payment of bills
+Note:Savings and investments performed into your moniflix accounts is free
+In addition, moniflix is designed to give values to your investments with us,we give you attractive interest on all investment,with our app,you can access,withdraw your savings and investments when due or desired, transfer as as much pay bills without huddles.
+        </p>
+        <p class="module-body">
+            Moniflix is duly approved and powered by Global Diamond Cooperative LTD.
+Our esteemed customers can register for our services via our website <a href="www.Moniflix.com">www.moniflix.com</a> and access loans conveniently with easy loan repayment.
+You can visit our site to register for more:
+Daily savings(Ajo)
+Monthly savings(cooperative savings)
+Register/create Portal for Flixcard dealer in your locality and so much more!
+We welcome you once more and appreciate you
+From all of us at Moniflix Nigeria.
+<p class="module-body">
+            
+            <div class="setcenter">
+            <h4><strong>Your Account Number is:</h3> <h2><em><b>"<%=Number(currentUser.phone)%>"</b></em></h2> </strong>
+            </div>
+        </p>
+<p class="module-body">
+The Moniflix Team!
+</p>
+        </p>
+        <div class="module-foot setcenter">
+            <div class="control-group">
+                <div class="controls clearfix">
+                    <a href="/users/deposit" class="btn btn-primary"> Make Your First Savings</a>
+                    <a href="/dashboard" class="btn btn-primary"> Go To Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+
+
+
+<% include partials/footer %>

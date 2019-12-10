@@ -1,0 +1,54 @@
+<% include partials/header %>
+
+
+
+                    <div class="span9 setcenter">
+                        <div class="content">
+                            <div class="btn-controls">
+                                <div class="btn-box-row row-fluid setcenter">
+                               
+                               <form action="disburse" method="POST" class="form-vertical">
+                        <div class="module-head">
+                            <h3>Send Funds To User</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span4" name="recepient" type="text" id="userphone" placeholder="Recepient Phone Number" value="<%=user.phone%>">
+                                </div>
+                                <div class="controls row-fluid">
+                                    <input class="span4" name="amount" type="text" id="userphone" placeholder="amount">
+                                </div>
+                                <div class="controls row-fluid">
+                                    <input class="span4" name="details" type="text" id="userphone" placeholder="Details (Optional)">
+                                </div>
+                                <div class="controls row-fluid">
+                                    <span> You are sending money to <%= user.firstname %>, Kindly confirm this<span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary">NEXT</button>
+                                                            
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    <!--/.span9-->
+                </div>
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

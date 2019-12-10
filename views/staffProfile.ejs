@@ -1,0 +1,39 @@
+<% include partials/header %>
+
+<div class="span9">
+    <div class="content">
+      <div class="table-responsive">
+        <h4>Staff Profile </h4>
+        </div>
+        <div class="span8">
+        <input class="span4" type="text" placeholder="Firstname" value="<%=currentUser.firstname%>" autofocus>
+        <input class="span4" type="text" placeholder="Lastname" value="<%=currentUser.lastname%>" autofocus>
+        <input class="span4" type="text" placeholder="Username" value="<%=currentUser.username%>" autofocus>
+        <input class="span4" type="text" placeholder="Phone" value="<%=currentUser.phone%>" autofocus>
+        <input class="span4" type="text" placeholder="BVN" value="<%=currentUser.bvn%>" autofocus>
+        <input class="span4" type="text" placeholder="Date of Birth" value="<%=currentUser.dob%>" autofocus>
+        <input class="span4" type="text" placeholder="Nationality" value="<%=currentUser.nationality%>" autofocus>
+        <input class="span4" type="text" placeholder="Current City" value="<%=currentUser.city%>" autofocus>
+        <input class="span4" type="text" placeholder="Full Address" value="<%=currentUser.address%>" autofocus>
+        <input class="span4" type="text" placeholder="Salary" value="<%=currentUser.salary%>" autofocus>
+        </div>
+        <div class="span8">
+        <button class="btn btn-primary pull-right" type="submit">Update Record</button>
+        <button class="btn btn-primary pull-right" type="submit">Remove Staff Record</button>
+        </div>
+
+ 
+         
+              </div>
+            </div>
+                      
+            <!--/.span9-->
+        </div>
+    </div>
+     <!--/.container-->
+</div>
+<!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

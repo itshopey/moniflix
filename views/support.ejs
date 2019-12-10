@@ -1,0 +1,57 @@
+<% include partials/loginheader %>
+
+<div class="wrapper">
+        <div class="container">
+
+<div class="span9">
+    <div class="content">
+<p> <h4> We love to hear from you, your feedback is important to us, <br>Kindly reach us with the information below. <br> Or leave a message using the contact form below and we will be in touch as soon as possible.</h4></p>
+
+            <div class="row">
+                <div class="module module-login span4 offset4">
+                    <form action="/contact" method="POST" class="form-vertical">
+                        <div class="module-head">
+                            <h3>Contact Us</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="name" type="text" id="name" placeholder="Your Name">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="email" type="text" id="email" placeholder="Your Email">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="subject" type="text" id="text" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <textarea class="span12" name="message" id="message" rows="7" placeholder="Your Message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <button type="submit" class="btn btn-primary pull-right">Start Chat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.wrapper-->
+
+
+
+
+<% include partials/loginfooter %>

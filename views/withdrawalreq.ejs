@@ -1,0 +1,71 @@
+<% include partials/header %>
+
+<div class="span9">
+    <div class="content">
+      <div class="table-responsive">
+        <h4>Withdrawal Requests </h4>
+       <div>
+        <input class="span9 searchbox" id="search" type="textbox" placeholder="Type To Search">
+       </div>
+         <table id="mytable" class="table table-bordred table-striped">
+          <thead>
+           <th>Account</th>
+           <th>User</th>
+           <th>Date</th>
+           <th>Amount</th>
+           <th>Status</th>
+           <th>Action</th>
+          </thead>
+    <tbody>
+      <%for(var i = 0; i < users.length; i++) {%>
+    
+        <%var trans = users[i].withdrawalRequests%>
+          <% trans.forEach(function(transaction){ %>
+              <tr>
+            <%if(transaction.type === "Cash Withdrawal Request"){%>
+        <td><%=transaction.account%></td>
+        <td><%=transaction.owner%></td>
+        <td><%= transaction.date %></td>
+        <td><%=transaction.amount%></td>
+        <td><%=transaction.status%></td>
+        <td>
+          <a href="/admin/withdrawalreq/process/<%=transaction._id%>" class="btn btn-primary tablebtndelete"><span class="icon-chevron-right"></span></a>
+        </td>
+      </tr>
+      
+      <%}else { %>
+      <%} %>
+      <% }) %>
+      <% } %>
+    </tbody>
+    
+</table>
+    <div class="module-foot">
+     <div class="control-group controls clearfix">
+       <ul class="pagination pull-right pages">
+          <li class="disabled nav-li"><a href="#"><span class="icon-fast-backward"></span></a></li>
+          <li class="active nav-li"><a href="#">1</a></li>
+          <li class="nav-li"><a href="#">2</a></li>
+          <li class="nav-li"><a href="#">3</a></li>
+          <li class="nav-li"><a href="#">4</a></li>
+          <li class="nav-li"><a href="#">5</a></li>
+          <li class="nav-li"><a href="#"><span class="icon-fast-forward"></span></a></li>
+        </ul>
+     </div>
+    </div>
+  </div>
+ 
+         
+              </div>
+            </div>
+                      
+            <!--/.span9-->
+        </div>
+    </div>
+     <!--/.container-->
+</div>
+<!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

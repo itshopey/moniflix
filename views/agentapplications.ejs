@@ -1,0 +1,59 @@
+<% include partials/header %>
+
+<div class="span9">
+    <div class="content">
+      <div class="table-responsive">
+        <h4>Agent Applications</h4>
+       <div>
+        <input class="span9 searchbox" id="search" type="textbox" placeholder="Type To Search">
+       </div>
+         <table id="mytable" class="table table-bordred table-striped">
+          <thead>
+           <th>Agent Name</th>
+           <th>Application Date</th>
+           <th>Application Status</th>
+           <th>Action</th>
+          </thead>
+    <tbody>
+          <% agent.forEach(function(agent){ %>
+              <tr>
+        <td><%=agent.firstname%> <%=agent.lastname%></td>
+        <td><%=agent.applicationDate%></td>
+        <td><%=agent.status%></td>
+        <td>
+          <a href="/agentapplications/:<%=agent._id%> "class="btn btn-primary tablebtndelete"><span class="icon-chevron-right"></span></a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+    
+</table>
+    <div class="module-foot">
+     <div class="control-group controls clearfix">
+       <ul class="pagination pull-right pages">
+          <li class="disabled nav-li"><a href="#"><span class="icon-fast-backward"></span></a></li>
+          <li class="active nav-li"><a href="#">1</a></li>
+          <li class="nav-li"><a href="#">2</a></li>
+          <li class="nav-li"><a href="#">3</a></li>
+          <li class="nav-li"><a href="#">4</a></li>
+          <li class="nav-li"><a href="#">5</a></li>
+          <li class="nav-li"><a href="#"><span class="icon-fast-forward"></span></a></li>
+        </ul>
+     </div>
+    </div>
+  </div>
+ 
+         
+              </div>
+            </div>
+                      
+            <!--/.span9-->
+        </div>
+    </div>
+     <!--/.container-->
+</div>
+<!--/.wrapper-->
+
+        
+        
+<% include partials/footer %>

@@ -1,0 +1,84 @@
+<% include partials/header %>
+
+        <div class="container">
+            <div class="row">
+                <div class="module span8">
+                    <form class="form-vertical" action="/admin/withdrawalreq/process" method="POST">
+                        <div class="module-head">
+                            <h3>Process Transaction</h3>
+                        </div>
+                        <% if(message != "") {%>
+                        <div class="alert alert-dismissible" role="alert">
+                        <%= message %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <% } %>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+
+                                <p class="btn-box big span4">
+                                    Transaction REF: 
+                                        <b>
+                                            <%=transaction._id%>
+                                        </b>
+                                    </p>
+                                    <p class="btn-box big span4">
+                                    Transaction Amount: 
+                                        <b>
+                                            ₦ <%=transaction.amount%>
+                                        </b>
+                                    </p>
+                                    <p class="btn-box big span4">
+                                    Transaction Status: 
+                                        <b>
+                                        <%=transaction.status%>
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+    <input name="transactionId" type="hidden" value="<%=transaction._id%>"> 
+    <input name="amount" type="hidden" value="<%=transaction.amount%>"> 
+    <input name="owner" type="hidden" value="<%= transaction.account %>"> 
+    <input name="transactionStatus" type="hidden" value="<%= transaction.status %>"> 
+    
+                                
+                        <div class="module-foot setcenter">
+                        
+                        <% if(transaction.status === "Success - Debited") {%>
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Disburse</button></b>
+                                </div>
+                            </div>
+                        <% } else if(transaction.status === "Success - Disbursed"){ %>
+                             <div class="control-group">
+                                <div class="controls clearfix">
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Query</button></b>
+                                </div>
+                            </div>
+                        <% } else { %>
+                             <div class="control-group">
+                                <div class="controls clearfix">
+                                        <b><button type="submit" class="btn btn  btn-primary mr-2 mb-2">Approve</button></b>
+                                </div>
+                            </div>
+                        <% } %>
+
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+                               
+
+
+
+
+
+    <% include partials/footer %>

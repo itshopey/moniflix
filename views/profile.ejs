@@ -1,0 +1,83 @@
+<% include partials/header %>
+
+        <div class="container">
+            <div class="row">
+                <div class="module span4">
+                    <form class="form-vertical" action="/users/profile">
+                        <div class="module-head">
+                            <h3>My Profile</h3>
+                        </div>
+                        <% if(message != "") {%>
+                        <div class="alert alert-dismissible" role="alert">
+                        <%= message %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <% } %>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="username" type="text" id="username" value= "<%= currentUser.username%>" readonly> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="firstname" type="text" id="firstname" value="<%= currentUser.firstname%>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-body">
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="lastname" type="text" id="lastname" value="<%= currentUser.lastname%>" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="email" type="text" id="email" value="<%= currentUser.email%>" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="phone" type="text" id="phone" value="<%= currentUser.phone%>" readonly>
+                                </div>
+                            <div class="module-head">    
+                            <H3>Bank Details</h3>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="bankName" type="text" id="bankName" value="<%= currentUser.bankName%>" placeholder="Bank Name" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="accountName" type="text" id="AccountName" value="<%= currentUser.accountName%>" placeholder="Account Name " readonly>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="control-group">
+                                <div class="controls row-fluid">
+                                    <input class="span12" name="accountNumber" type="text" id="accountNumber" value="<%= currentUser.accountNumber%>" placeholder="Account Number " readonly>
+                                </div>
+                            </div>
+                        <div class="module-foot">
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <a href="/users/profile/settings" class="btn btn-primary pull-right"> Edit Bank Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+
+
+
+<% include partials/footer %>

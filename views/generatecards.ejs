@@ -1,0 +1,65 @@
+<% include partials/header %>
+
+<div class="span9">
+    <div class="content">
+    <div>
+    <h4> Welcome <%= currentUser.firstname %>, Here are your recent transactions</h4>
+    </div>
+<!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Recent Transactions
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Account No</th>
+                                            <th>Transaction Date</th>
+                                            <th>Transaction Amount</th>
+                                            <th>Transaction Type</th>
+                                            <th>Transaction Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <%  for (var i = currentUser.transactions.length -1; i >= 0; i--) { %>
+            <tr>
+               <td><%= Number(currentUser.phone) %></td>
+               <td><%= moment(currentUser.transactions[i].date).format('LL'); %></td>
+               <td><%= currentUser.transactions[i].amount %></td>
+               <td><%= currentUser.transactions[i].type%> </td>
+               <td><%= currentUser.transactions[i].status%> </td>
+            </tr>
+        <% } %>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+
+
+
+
+
+
+
+
+         
+              </div>
+            </div>
+                      
+            <!--/.span9-->
+        </div>
+    </div>
+     <!--/.container-->
+</div>
+<!--/.wrapper-->
+
+        
+        
+<% include partials/tableFooter %>
