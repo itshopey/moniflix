@@ -18,14 +18,14 @@
                                 <div class="btn-box-row row-fluid">
                                     <a href="#" class="btn-box big span4"><i class="icon-money"></i>
                                     <b>
-                                    ₦ <%= dailydeposit %>
+                                    ₦ <%= dailyDeposit; %>
                                     </b>
                                         <p class="text-muted">
                                             Today's Savings
                                         </p>
                                     </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
                                     <b>
-                                    ₦ <%= currentUser.totaldeposit %>
+                                    ₦ <%= monthBalance %>
                                     </b>
                                         <p class="text-muted">
                                             This Month's Savings</p>
@@ -60,7 +60,5 @@
             <!--/.container-->
         </div>
         <!--/.wrapper-->
-
-        
         
 <% include partials/footer %>

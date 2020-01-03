@@ -9,31 +9,50 @@ router.get("/users/transfertouser", isLoggedIn, function(req, res){
 
 //Post Route
 router.post("/users/transfertouser", isLoggedIn, debitSender,  function(req, res){
-	User.findOne({phone: 0 + req.body.accountNumber}, function(err, user){
-		if(!user){
-			res.render("transfertouser", {currentUser:req.user, message:"Invalid Account Number"})
-		}else {
-	var receiverTotalDeposit = Number(user.totaldeposit) + Number(req.body.transferAmount);
-	var receiverBalance = receiverTotalDeposit * 0.97
-	User.findOneAndUpdate({phone: 0 + req.body.accountNumber}, {availableforwithdrawal:receiverBalance, totaldeposit:receiverTotalDeposit}, function(err, user){
-		if(!user){
-			res.render("transfertouser", {currentUser:req.user, message:"Invalid Account Number"})
-		} else {
-			user.transactions.push({
-			type: "Credit - Transfer From ",
-			sender: Number(req.user.phone),
-			date: req._startTime,
-			amount: req.body.transferAmount
+	let transferAmount = req.body.transferAmount;
+	if(req.user.availableforwithdrawal < transferAmount){
+		res.render("transfertouser", {message:"Insufficient funds", currentUser:req.user})
+	} else {
+		var newSenderBalance = req.user.availableforwithdrawal - req.body.transferAmount;
+		User.findOneAndUpdate({_id:req.user._id}, {availableforwithdrawal:newSenderBalance}, function(err, user){
+			if(err){
+				console.log(err);
+			} else {
+				user.transactions.push({
+					amount: transferAmount,
+					type: "Debit - Transfer To User",
+					owner: req.body.accountNumber,
+					date: req._startTime,
+					status: "Success"
+				});
+				user.save();
+				User.findOne({phone:0 + req.body.accountNumber}, function(err, user){
+					if(err){
+						res.render('transfertouser', {message: "Invalid Account Number", currentUser:req.user});
+					} else {
+						var receiverBal = Number(user.availableforwithdrawal) + Number(transferAmount) * 0.97;
+						User.findOneAndUpdate({phone:0 + req.body.accountNumber}, {availableforwithdrawal:receiverBal}, function(err, user){
+							if(err){
+								res.render('transfertouser', {message: "Invalid Account Number", currentUser:req.user})
+							} else {
+								user.transactions.push({
+									amount: transferAmount,
+									type: "Credit - Transfer From User",
+									sender: req.user.accountNumber,
+									date: req._startTime,
+									status: "Success"
+								});
+								user.save();
+								res.render("transfertouser", {message:"Transfer Successful", currentUser:req.user})
+							}
+						})
+					}
 				})
-			user.save();
-	res.render("transfertouser", {currentUser:req.user, message:"Transfer Successful"})
-		}
-	})
-
-		}
-	})
-	
-})
+			}
+		})
+	}
+});
+		
 
 //MIDDLEWARES
 //Debit sender 

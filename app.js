@@ -1,7 +1,7 @@
 var createError 		= require('http-errors');
     express 			= require('express');
     app 				= express();
-	  router 				= express.Router();
+	router 				= express.Router();
     path 				= require('path');
     cookieParser 		= require('cookie-parser');
     logger 				= require('morgan');
@@ -9,12 +9,15 @@ var createError 		= require('http-errors');
     nodemailer 			= require('nodemailer');
     mongoose 			= require('mongoose');
     passport			= require('passport');
+    request             = require('request');
+    _                   = require('lodash');
     LocalStrategy		= require('passport-local');
     User 				= require('./models/user');
     Staff       		= require('./models/staff');
     Card                = require('./models/cards');
     moment              = require('moment');
                           moment().format();
+    
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -36,6 +39,7 @@ var adminRouter 		= require('./routes/admin');
 var depositRouter 		= require('./routes/deposit');
 var withdrawalRouter 	= require('./routes/withdrawal');
 var transfersRouter 	= require('./routes/transfers');
+var cardRouter          = require('./routes/card')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,6 +52,7 @@ app.use(adminRouter);
 app.use(depositRouter);
 app.use(withdrawalRouter);
 app.use(transfersRouter);
+app.use(cardRouter);
 
 //Setting Up Database
 mongoose.connect('mongodb://localhost/moniflix-app', {useUnifiedTopology: true, useNewUrlParser: true});

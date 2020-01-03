@@ -3,41 +3,33 @@
         <div class="container">
             <div class="row">
                 <div class="module span4">
-        <form id='payform' class="form-vertical" onsubmit='return false;' method='POST' action='/pay'>
-       <div class="module-head">
-        <h3>Deposit With Debit Card</h3>
-            <% if(message != "") {%>
-            <div class="alert alert-dismissible" role="alert">
-                <%= message %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-        </div>
-        <% } %>
-        </div>
- <div class="module-body">
-    <div class="control-group">
-        <div class="controls row-fluid">
-            <input class="span12" name="total" type="text" placeholder="How Much Do You Want To Deposit?" required autofocus>
-            <span></span>
-        </div>
-    </div>
-    <input type='hidden' name='v_merchant_id' value='DEMO' />
-    <input type='hidden' name='merchant_ref' value='234-567-890' />
-    <input type='hidden' name='memo' value='Credit - Debit Card Deposit' />
-
-    <input type='hidden' name='developer_code' value='pq7778ehh9YbZ' />
-
-    <input type='hidden' name='cur' value='NGN' />
-
-<div class="module-foot">
-    <div class="control-group">
-        <div class="controls clearfix">
-            <button type="submit" class="btn btn-primary pull-right">Make Cash Deposit</button>
-        </div>
-    </div>
-</div>
-</form> 
+                        <form action="/paystack/pay" method="POST" >
+                            <div class="module-head">
+                                <h3>Deposit With Debit Card</h3>
+                                  <% if(message != "") {%>
+                                    <div class="alert alert-dismissible" role="alert">
+                                        <%= message %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <% } %>
+                            </div>
+                            <div class="module-body">
+                                <div class="control-group">
+                                    <div class="controls row-fluid">
+                                        <input class="span12" name="amount" type="Number" placeholder="How Much Do You Want To Deposit?" required autofocus>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="hidden" name="fullname" value="<%=currentUser.firstname%> <%=currentUser.lastname%>">
+                                <input type="hidden" name="email" value="<%=currentUser.email%>">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-lg btn-primary">Pay</button>
+                            </div>
+                          </form>
               </div>
                                     </div>
                                 </div>

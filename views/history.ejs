@@ -24,7 +24,7 @@
                                     </thead>
                                     <tbody>
                                         
-                                        <%  for (var i = currentUser.transactions.length -1; i >= 0; i--) { %>
+        <%  for (var i = currentUser.transactions.length -1; i >= 0; i--) { %>
             <tr>
                <td><%= Number(currentUser.phone) %></td>
                <td><%= moment(currentUser.transactions[i].date).format('LL'); %></td>
@@ -33,13 +33,11 @@
                <td><%= currentUser.transactions[i].status%> </td>
             </tr>
         <% } %>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
                     <!--End Advanced Tables -->
 
 
@@ -62,4 +60,4 @@
 
         
         
-<% include partials/tableFooter %>
+<% include partials/footer %>

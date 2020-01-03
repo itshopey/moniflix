@@ -9,6 +9,7 @@ sender: String,
 owner: String,
 date: String,
 status: String,
+ref: String,
 });
 
 transactionsSchema.plugin(passportLocalMongoose);
@@ -22,6 +23,7 @@ date: String,
 status: String,
 processedBy: String,
 account: Number,
+ref: String,
 });
 
 withdrawSchema.plugin(passportLocalMongoose); 

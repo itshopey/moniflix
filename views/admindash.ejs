@@ -8,23 +8,23 @@
                         </div>
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    <a class="btn-box big span4"><i class="icon-money"></i>
                                     <b>
-                                    ₦ <%= currentUser.dailydeposit %>
+                                    ₦ <%= Math.floor(totalBalance) %>
                                     </b>
                                         <p class="text-muted">
                                             Current Balance
                                         </p>
-                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    </a><a class="btn-box big span4"><i class="icon-money"></i>
                                     <b>
-                                    ₦ <%= currentUser.totaldeposit %>
+                                    ₦ <%= totalDailyDeposit %>
                                     </b>
                                         <p class="text-muted">
                                             Today's Deposits
                                         </p>
-                                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i>
+                                    </a><a class="btn-box big span4"><i class="icon-money"></i>
                                     <b>
-                                    ₦
+                                    ₦ <%= totalDailyWithdrawal %>
                                     </b>
                                         <p class="text-muted">
                                         	Today's Withdrawals

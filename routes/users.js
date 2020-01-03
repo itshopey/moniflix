@@ -8,22 +8,38 @@ router.get("/welcome", isLoggedIn, function(req, res){
 
 //Show user Dashboard page
 router.get("/dashboard", isLoggedIn, function(req, res){
+	let monthBalance;
+	function monthlyDeposit(){
+		var deposit = req.user.transactions;
+		var monthlyDeposit = [];
+		for (let i = 0; i < deposit.length; i++) {
+			if(moment(deposit[i].date).format('MM YYYY') === moment(req._startTime).format('MM YYYY') && deposit[i].type === "Credit - Cash Deposit" || moment(deposit[i].date).format('MM YYYY') === moment(req._startTime).format('MM YYYY') && deposit[i].type === "Credit - Flix Card" || moment(deposit[i].date).format('MM YYYY') === moment(req._startTime).format('MM YYYY') && deposit[i].type === "Credit - Transfer From User" || moment(deposit[i].date).format('MM YYYY') === moment(req._startTime).format('MM YYYY') && deposit[i].type === "Credit - Debit Card"){
+				monthlyDeposit.push(deposit[i].amount)
+				var totalMonthlyDeposit = monthlyDeposit.reduce(function(sum, deposit){
+					return sum + deposit;
+				}, 0)
+			}
+		}
+		monthBalance = totalMonthlyDeposit || 0;
+	}
+
 	function dailydeposit(){
-	User.findOne({_id:req.user._id}, function(err, user){
-	var deposit = req.user.transactions;
-	var dailydeposit = [];
-	var monthlydeposit = [];
+	let deposit = req.user.transactions;
+	let dailydeposit = [];
+	let userDailyDeposit;
 	for (var i = deposit.length - 1; i >= 0; i--) {
-		if (moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL') && deposit[i].type === "Credit - Cash Deposit" || moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL') && deposit[i].type === "Credit - Flix Card Deposit")
+		if (moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL') && deposit[i].type === "Credit - Cash Deposit" || moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL') && deposit[i].type === "Credit - Flix Card" || moment(deposit[i].date).format('LL') === moment(req._startTime).format('LL') && deposit[i].type === "Credit - Transfer From User" || moment(deposit[i].date).format('DD MM YYYY') === moment(req._startTime).format('DD MM YYYY') && deposit[i].type === "Credit - Debit Card"){
 	dailydeposit.push(deposit[i].amount)
 	var totaldailydeposit = dailydeposit.reduce(function(sum, deposit){
           return sum + deposit;
-        }, 0); 
+		}, 0); 
 	}
-    res.render("dashboard", { dailydeposit:totaldailydeposit, currentUser: req.user, message: "" })
-
-	})
+	}
+	userDailyDeposit = totaldailydeposit|| 0;
+    res.render("dashboard", { dailyDeposit:userDailyDeposit, monthBalance:monthBalance, currentUser: req.user, message: "" })
 }
+
+monthlyDeposit();
 dailydeposit();
 	});
 
@@ -108,25 +124,6 @@ router.get("/staffapplications", isLoggedIn, function(req, res){
 
 
 //MIDDLEWARES
-//Calculate User Daily Deposit
-// function calculateDailyDeposit(req, res, next){
-// 	User.findOne({_id:req.user._id}, function(err, user){
-// if(err){
-// 	console.log(err);
-// } else{
-// 	var deposit = user.dailydeposit
-// 	for (var i = deposit.length - 1; i >= 0; i--) {
-//             if(moment(deposit[i].date).format('LL') === moment(deposit[i].date).format('LL')){
-//             	var dailyDeposit = transactions[i]
-//             	console.log(dailyDeposit)
-//             }
-			
-// 	}
-// 	return next()
-// }
-// });
-// };
-
 //Sign in middleware
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){

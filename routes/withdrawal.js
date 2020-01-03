@@ -18,9 +18,7 @@ router.get("/users/withdrawal/cashwithdrawal", isLoggedIn, function(req, res){
 router.post("/users/withdrawal", isLoggedIn, function(req, res){
 	var withdrawalAmount = Number(req.body.withdrawalAmount);
 	var availableforwithdrawal = req.user.availableforwithdrawal;
-	if(!withdrawalAmount){
-	res.render("cashwithdrawal", { currentUser: req.user, message:"Please Specify Withdrawal Amount" })
-	} else if(withdrawalAmount < 500 ){
+	if(withdrawalAmount < 500 ){
 	res.render("cashwithdrawal", { currentUser: req.user, message:"You Cannot Withdraw Below ₦ 500" })
 	} else if(withdrawalAmount > availableforwithdrawal){
 	res.render("cashwithdrawal", { currentUser: req.user, message:"You cannot Withdraw Above Your Withdrawable Balance Of ₦ " + availableforwithdrawal });
@@ -35,7 +33,8 @@ router.post("/users/withdrawal", isLoggedIn, function(req, res){
 					amount: req.body.withdrawalAmount,
 					status: "Pending",
 					owner: req.user.firstname,
-					account: req.user.phone
+					account: req.user.phone,
+					ref: 'TXN' + Math.floor((Math.random() * 1000000000) + 1)
 				}
 				user.withdrawalRequests.push(transaction);
 				user.transactions.push(transaction);

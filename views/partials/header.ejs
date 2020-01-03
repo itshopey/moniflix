@@ -24,9 +24,9 @@
                         <i class="icon-reorder shaded"></i></a><a class="brand" href="/">MoniFlix </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav nav-icons" >
-                            <li class=""><a href="/about">About</a></li>
-                            <li class=""><a href="/services">Services</a></li>
-                            <li class=""><a href="/contact">Contact</a></li>
+                            <li ><a href="/about">About</a></li>
+                            <li ><a href="/services">Services</a></li>
+                            <li ><a href="/contact">Contact</a></li>
                         </ul>
                         <ul class="nav pull-right">
                            <% if(!currentUser){ %>
@@ -59,6 +59,7 @@
                                 <img src="/images/user.png" class="nav-avatar" />
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                   
                                     <li><a href="/users/profile">Profile</a></li>
                                     <li><a href="/users/updatepassword">Update Password</a></li>
                                     <li><a href="/users/profile/settings">Account Settings</a></li>
@@ -116,6 +117,9 @@
                                 </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                                 </i>More Pages </a>
                                     <ul id="togglePages" class="collapse unstyled">
+                                            <% if(currentUser.type === "Admin"){ %>
+                                        <li><a href="/admin/generateflixcard"><i class="icon-inbox"></i>Generate Flix Card </a></li>
+                                        <% } %>
                                         <li><a href="/users/notifications"><i class="icon-inbox"></i>Notifications </a></li>
                                         <li><a href="/users/profile"><i class="icon-inbox"></i>My Profile </a></li>
                                         <li><a href="/support"><i class="icon-inbox"></i>Support </a></li>

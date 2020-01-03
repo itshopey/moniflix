@@ -3,7 +3,7 @@ var mongoose 				= require('mongoose'),
 
 var cardSchema = new mongoose.Schema({
 	pin:Number,
-	amount: Number,
+	amount:Number,
 	status: String
 	})
 

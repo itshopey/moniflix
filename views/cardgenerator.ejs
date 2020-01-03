@@ -1,6 +1,46 @@
+<%include partials/header%>
 <body>
   <div class="container">
-  <h1>Random Number Generator</h1>
-   <script src="random.js"></script> 
+  <h1>Generate Flix Card</h1>
+  <form action="/admin/generateflixcard" method="POST">
+  <div>
+    <input type="number" name="quantity" placeholder="Quantity" required>
+  </div>
+  <div>
+    <input type="number" name="amount" placeholder="Amount" required>
+  </div>
+  <div>
+    <button class="btn btn-primary" type="submit">Generate</button>
+  </div>
+  </form>
+  <% if(cards !=""){ %>
+    <div>
+      <h3>Generated Cards</h3>
+      <div>
+        <table id="cardsTable">
+          <thead>
+              <th>Pin</th>
+              <th>Amount</th>
+          </thead>
+          <tbody>
+          <%  for (var i = cards.length -1; i >= 0; i--) { %>
+            <tr>
+                <td>
+                 <%= cards[i].pin %>
+                </td>
+                <td>
+                 <%= cards[i].amount %>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+          <button type="submit" onclick="printCards()">Print Cards</button>
+        </table>
+      </div>
+    </div>
+    <% } %>
   </div>
 </body>
+
+
+<%include partials/footer%>
